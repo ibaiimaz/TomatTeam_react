@@ -1,0 +1,3 @@
+- https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/new-db
+- http://stackoverflow.com/questions/42757322/scaffolding-error-deps-json-doesnt-exist
+- https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger
