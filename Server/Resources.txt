@@ -1,3 +1,16 @@
+RESOURCES USED IN THE PROJECT
+
+//.NET CORE Web API example
 - https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/new-db
+
+//HP BUG with scaffolding
 - http://stackoverflow.com/questions/42757322/scaffolding-error-deps-json-doesnt-exist
+
+//Swagger API UI
 - https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger
+
+//Navigation properties empty fix
+- http://stackoverflow.com/questions/41373878/json-response-does-not-contain-all-the-navigation-properties-entityframework-cor
+
+//Load related data (Navigation) with EF
+- https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/reading-related-data-with-the-entity-framework-in-an-asp-net-mvc-application

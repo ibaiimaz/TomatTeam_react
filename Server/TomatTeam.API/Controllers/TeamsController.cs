@@ -11,16 +11,16 @@ namespace TomatTeam.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Teams")]
-    public class TeamsController : Controller
+    public class TeamController : Controller
     {
         private readonly TomatTeamContext _context;
 
-        public TeamsController(TomatTeamContext context)
+        public TeamController(TomatTeamContext context)
         {
             _context = context;
         }
 
-        // GET: api/Teams
+        // GET: api/Team
         [HttpGet]
         public IEnumerable<Team> GetTeams()
         {

@@ -10,57 +10,57 @@ using TomatTeam.API.Models;
 namespace TomatTeam.API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Users")]
-    public class UserController : Controller
+    [Route("api/Pomodoroes")]
+    public class PomodoroController : Controller
     {
         private readonly TomatTeamContext _context;
 
-        public UserController(TomatTeamContext context)
+        public PomodoroController(TomatTeamContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Pomodoro
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<Pomodoro> GetPomodoroes()
         {
-            return _context.Users;
+            return _context.Pomodoroes.Include(c=> c.User);
         }
 
-        // GET: api/Users/5
+        // GET: api/Pomodoro/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser([FromRoute] int id)
+        public async Task<IActionResult> GetPomodoro([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.Include(c=> c.Team).SingleOrDefaultAsync(m => m.UserId == id);
+            var pomodoro = await _context.Pomodoroes.SingleOrDefaultAsync(m => m.PomodoroId == id);
 
-            if (user == null)
+            if (pomodoro == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(pomodoro);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Pomodoro/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser([FromRoute] int id, [FromBody] User user)
+        public async Task<IActionResult> PutPomodoro([FromRoute] int id, [FromBody] Pomodoro pomodoro)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.UserId)
+            if (id != pomodoro.PomodoroId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(pomodoro).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace TomatTeam.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!PomodoroExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace TomatTeam.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Pomodoro
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] User user)
+        public async Task<IActionResult> PostPomodoro([FromBody] Pomodoro pomodoro)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Users.Add(user);
+            _context.Pomodoroes.Add(pomodoro);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetPomodoro", new { id = pomodoro.PomodoroId }, pomodoro);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Pomodoro/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        public async Task<IActionResult> DeletePomodoro([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
+            var pomodoro = await _context.Pomodoroes.SingleOrDefaultAsync(m => m.PomodoroId == id);
+            if (pomodoro == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Pomodoroes.Remove(pomodoro);
             await _context.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok(pomodoro);
         }
 
-        private bool UserExists(int id)
+        private bool PomodoroExists(int id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return _context.Pomodoroes.Any(e => e.PomodoroId == id);
         }
     }
 }

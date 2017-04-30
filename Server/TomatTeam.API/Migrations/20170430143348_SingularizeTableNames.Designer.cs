@@ -8,9 +8,10 @@ using TomatTeam.API.Models;
 namespace TomatTeam.API.Migrations
 {
     [DbContext(typeof(TomatTeamContext))]
-    partial class TomatTeamContextModelSnapshot : ModelSnapshot
+    [Migration("20170430143348_SingularizeTableNames")]
+    partial class SingularizeTableNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

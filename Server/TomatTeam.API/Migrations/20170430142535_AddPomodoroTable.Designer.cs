@@ -8,29 +8,14 @@ using TomatTeam.API.Models;
 namespace TomatTeam.API.Migrations
 {
     [DbContext(typeof(TomatTeamContext))]
-    partial class TomatTeamContextModelSnapshot : ModelSnapshot
+    [Migration("20170430142535_AddPomodoroTable")]
+    partial class AddPomodoroTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("TomatTeam.API.Models.Pomodoro", b =>
-                {
-                    b.Property<int>("PomodoroId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("StartTime");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("PomodoroId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Pomodoro");
-                });
 
             modelBuilder.Entity("TomatTeam.API.Models.Team", b =>
                 {
@@ -41,7 +26,7 @@ namespace TomatTeam.API.Migrations
 
                     b.HasKey("TeamId");
 
-                    b.ToTable("Team");
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("TomatTeam.API.Models.User", b =>
@@ -57,15 +42,7 @@ namespace TomatTeam.API.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("TomatTeam.API.Models.Pomodoro", b =>
-                {
-                    b.HasOne("TomatTeam.API.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TomatTeam.API.Models.User", b =>
