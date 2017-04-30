@@ -31,7 +31,9 @@ namespace TomatTeam.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+            //Fix problem to get navigation properties
+            .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=TomatTeam;Trusted_Connection=True;";
             services.AddDbContext<TomatTeamContext>(options => options.UseSqlServer(connection));

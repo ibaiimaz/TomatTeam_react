@@ -10,57 +10,57 @@ using TomatTeam.API.Models;
 namespace TomatTeam.API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Teams")]
-    public class TeamsController : Controller
+    [Route("api/Users")]
+    public class UsersController : Controller
     {
         private readonly TomatTeamContext _context;
 
-        public TeamsController(TomatTeamContext context)
+        public UsersController(TomatTeamContext context)
         {
             _context = context;
         }
 
-        // GET: api/Teams
+        // GET: api/Users
         [HttpGet]
-        public IEnumerable<Team> GetTeams()
+        public IEnumerable<User> GetUsers()
         {
-            return _context.Teams;
+            return _context.Users;
         }
 
-        // GET: api/Teams/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTeam([FromRoute] int id)
+        public async Task<IActionResult> GetUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var team = await _context.Teams.Include(c => c.Users).SingleOrDefaultAsync(m => m.TeamId == id);
+            var user = await _context.Users.Include(c=> c.Team).SingleOrDefaultAsync(m => m.UserId == id);
 
-            if (team == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(team);
+            return Ok(user);
         }
 
-        // PUT: api/Teams/5
+        // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTeam([FromRoute] int id, [FromBody] Team team)
+        public async Task<IActionResult> PutUser([FromRoute] int id, [FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != team.TeamId)
+            if (id != user.UserId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(team).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace TomatTeam.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TeamExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace TomatTeam.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Teams
+        // POST: api/Users
         [HttpPost]
-        public async Task<IActionResult> PostTeam([FromBody] Team team)
+        public async Task<IActionResult> PostUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Teams.Add(team);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTeam", new { id = team.TeamId }, team);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Teams/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTeam([FromRoute] int id)
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var team = await _context.Teams.SingleOrDefaultAsync(m => m.TeamId == id);
-            if (team == null)
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.UserId == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Teams.Remove(team);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return Ok(team);
+            return Ok(user);
         }
 
-        private bool TeamExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Teams.Any(e => e.TeamId == id);
+            return _context.Users.Any(e => e.UserId == id);
         }
     }
 }

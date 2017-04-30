@@ -14,7 +14,14 @@ namespace TomatTeam.API.Models
 
         public DbSet<Team> Teams { get; set; }
         public DbSet<User> Users { get; set; }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Team>().ToTable("Team");
+        //    modelBuilder.Entity<User>().ToTable("User");
+        //}
     }
+
 
     public class Team
     {
