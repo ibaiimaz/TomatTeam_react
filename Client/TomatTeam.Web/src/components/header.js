@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 
 class Header extends Component {
     render() {
+        const containerStyle = {
+            border: '1px solid #666',
+            padding: '5px'
+        };
+
         return (
-            <div>
+            <div style={containerStyle}>
+                <div style={{'float':'right'}}>User: { this.props.currentUser.userName }</div>
                 <h2>TOMATTEAM</h2>
-                <h3>Team: { this.props.teamName }</h3>
-                <div>User: { this.props.userName }</div>
+                <h4>Team: { this.props.currentUser.teamName }</h4>
+                
             </div>
         );
     }

@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const MainPomodoro = (props) => {
-  return ( 
-    <div>Main Pomodoro</div>
-  );
-};
+export default class MainPomodoro extends Component {
+    render() {
+        const containerStyle = {
+            border: '1px solid #666',
+            padding: '5px',
+            width: '49%',
+            float: 'left'
+        };
 
-export default MainPomodoro;
+        return (
+            <div style={containerStyle}>
+                <h4>Main Pomodoro</h4>
+                <div>{this.props.pomodoro.id}</div>
+            </div>
+        )
+    }
+}
