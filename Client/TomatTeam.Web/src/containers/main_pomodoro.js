@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class MainPomodoro extends Component {
+class MainPomodoro extends Component {
     render() {
         const containerStyle = {
             border: '1px solid #666',
@@ -12,8 +13,16 @@ export default class MainPomodoro extends Component {
         return (
             <div style={containerStyle}>
                 <h4>Main Pomodoro</h4>
-                <div>{this.props.pomodoro.id}</div>
+                <div>{this.props.currentPomodoro.time}</div>
             </div>
         )
     }
 }
+
+function mapStateToProps(state) {
+  return {
+      currentPomodoro: state.currentPomodoro
+  };
+}
+
+export default connect(mapStateToProps)(MainPomodoro);
