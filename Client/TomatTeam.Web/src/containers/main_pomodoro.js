@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { startPomodoro } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
+import Timer from '../components/timer';
+import PomodoroStatus from '../components/pomodoro_status';
+
 class MainPomodoro extends Component {
     startPomodoro() {
         this.props.currentPomodoro.time = new Date();
@@ -18,13 +21,11 @@ class MainPomodoro extends Component {
             float: 'left'
         };
 
-        const time = this.props.currentPomodoro.time ? this.props.currentPomodoro.time.toString() : "";
-
         return (
             <div style={containerStyle}>
                 <h4>Main Pomodoro</h4>
-                <div>{time}</div>
-                <h5>{ this.props.currentPomodoro.status }</h5>
+                <Timer time={this.props.currentPomodoro.time} />
+                <PomodoroStatus status={this.props.currentPomodoro.status} />
                 <button type="button" onClick={() => this.startPomodoro()}>Start</button>
             </div>
         )
