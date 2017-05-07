@@ -1,8 +1,14 @@
-export default function() {
+export default function(state = null, action) {
+    switch(action.type) {
+        case 'POMODORO_STARTED':
+            return action.payload;
+    }
+
+    //Temporaly we'll return default values
     return {
         id: 1,
         userId: 1,
-        time: new Date('2017-05-01T09:04:00').toDateString(),
-        status: 1 //0: Not started 1: Working 2: Resting
+        time: null,
+        status: 0 //0: Not started 1: Working 2: Resting
     };
 }
