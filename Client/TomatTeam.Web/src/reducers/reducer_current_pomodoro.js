@@ -2,6 +2,8 @@ export default function(state = null, action) {
     switch(action.type) {
         case 'POMODORO_STARTED':
             return action.payload;
+        case 'POMODORO_CANCELLED':
+            return action.payload;
     }
 
     //Temporaly we'll return default values

@@ -5,3 +5,10 @@ export function startPomodoro(pomodoro) {
         payload: pomodoro
     };
 }
+
+export function cancelPomodoro(pomodoro) {
+    return {
+        type: 'POMODORO_CANCELLED',
+        payload: pomodoro
+    };
+}
