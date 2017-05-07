@@ -9,10 +9,10 @@ class App extends Component {
   
   render() {
     return (
-      <div>
+      <div> 
         <Header currentUser={this.props.currentUser} />
         <MainPomodoro currentUser={this.props.currentUser} />
-        <PomodoroList />      
+        <PomodoroList currentUser={this.props.currentUser} />
       </div>
     )
   }

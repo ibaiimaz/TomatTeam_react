@@ -22,23 +22,26 @@ class MainPomodoro extends Component {
 
     render() {
         const containerStyle = {
-            border: '1px solid #666',
+            border: '1px solid #ddd',
             padding: '5px',
-            width: '49%',
-            float: 'left'
+            // width: '49%',
+            // float: 'left'
         };
 
         return (
-            <div style={containerStyle}>
-                <h4>Main Pomodoro</h4>
-                <Timer time={this.props.currentPomodoro.time} />
-                <PomodoroStatus status={this.props.currentPomodoro.status} />
-                {this.props.currentPomodoro.status == 0 &&
-                    <button type="button" onClick={() => this.startPomodoro()} >Start</button>
-                }
-                {this.props.currentPomodoro.status != 0 &&
-                    <button type="button" onClick={() => this.cancelPomodoro()} >Cancel</button>
-                }
+            <div className="col-xs-12 col-sm-6 col-md-7">
+                <h3>USER: { this.props.currentUser.userName }</h3>
+                <div className="panel">
+                    <h4>Main Pomodoro</h4>
+                    <Timer time={this.props.currentPomodoro.time} />
+                    <PomodoroStatus status={this.props.currentPomodoro.status} />
+                    {this.props.currentPomodoro.status == 0 &&
+                        <button type="button" onClick={() => this.startPomodoro()} >Start</button>
+                    }
+                    {this.props.currentPomodoro.status != 0 &&
+                        <button type="button" onClick={() => this.cancelPomodoro()} >Cancel</button>
+                    }
+                </div>
             </div>
         )
     }

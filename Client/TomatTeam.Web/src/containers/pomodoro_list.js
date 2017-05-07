@@ -14,16 +14,19 @@ class PomodoroList extends Component {
   render() {
     const containerStyle = {
       border: '1px solid #666',
-      padding: '5px',
-      width: '49%',
-      float: 'right'
+      // padding: '5px',
+      // width: '49%',
+      // float: 'right'
     };
 
     return (
-      <div style={containerStyle}> 
-        <ul className="col-md-4 list-groups">
+      <div className="col-xs-12 col-sm-6 col-md-5"> 
+        <h3>TEAM: { this.props.currentUser.teamName } </h3>
+        <div className="panel">
+        <ul className="list-groups">
           {this.renderList()}
         </ul>
+        </div>
       </div>
     );
   }
