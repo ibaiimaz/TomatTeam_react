@@ -29,18 +29,21 @@ class MainPomodoro extends Component {
         };
 
         return (
-            <div className="col-xs-12 col-sm-6 col-md-7">
+            <div className="col-xs-12 col-sm-6 col-md-5">
                 <h3>USER: { this.props.currentUser.userName }</h3>
-                <div className="panel">
-                    <h4>Main Pomodoro</h4>
-                    <Timer time={this.props.currentPomodoro.time} />
-                    <PomodoroStatus status={this.props.currentPomodoro.status} />
-                    {this.props.currentPomodoro.status == 0 &&
-                        <button type="button" onClick={() => this.startPomodoro()} >Start</button>
-                    }
-                    {this.props.currentPomodoro.status != 0 &&
-                        <button type="button" onClick={() => this.cancelPomodoro()} >Cancel</button>
-                    }
+                <div className="panel row">
+                    <div className="col-md-7">
+                        <Timer time={this.props.currentPomodoro.time} />
+                        <PomodoroStatus status={this.props.currentPomodoro.status} />
+                    </div>
+                    <div className="col-md-5">
+                        {this.props.currentPomodoro.status == 0 &&
+                            <button type="button" onClick={() => this.startPomodoro()} >Start</button>
+                        }
+                        {this.props.currentPomodoro.status != 0 &&
+                            <button type="button" onClick={() => this.cancelPomodoro()} >Cancel</button>
+                        }
+                    </div>
                 </div>
             </div>
         )

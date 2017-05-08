@@ -2,7 +2,7 @@ import React from 'react';
 
 const PomodoroListItem = (props) => {
   return ( 
-    <li>{props.pomodoro.time.toString()}</li>
+    <li className="list-group-item">{props.pomodoro.time.toString()}</li>
   );
 };
 

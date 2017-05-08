@@ -20,10 +20,10 @@ class PomodoroList extends Component {
     };
 
     return (
-      <div className="col-xs-12 col-sm-6 col-md-5"> 
+      <div className="col-xs-12 col-sm-6 col-md-7"> 
         <h3>TEAM: { this.props.currentUser.teamName } </h3>
         <div className="panel">
-        <ul className="list-groups">
+        <ul className="list-group">
           {this.renderList()}
         </ul>
         </div>
