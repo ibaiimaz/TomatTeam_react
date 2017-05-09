@@ -1,36 +1,14 @@
 import React, { Component } from 'react';
 
-let interval = null, offset = null;
+let offset = null;
 
 export default class Timer extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = { countdown: null }
-    }
-
-    componentDidMount() {
-        this.checkCountdown();
-    }
-
-    componentDidUpdate(prev_props, prev_state) {
-        this.checkCountdown();
-    }
-
-    tick() {
-        let countdown = this.calculateCountdown();
-        this.setState({ countdown:  countdown });
-    }
-
-    checkCountdown() {
-        if(this.props.time != null && interval == null) {
-            interval = setInterval(this.tick.bind(this), 1000)
-        }
-    }
 
     calculateCountdown() {
-        let offset = new Date() - this.props.time;
-        return this.secondsTommss(((25 * 60000) - offset + 1000) / 1000);
+        console.log("currentTime" + this.props.currentTime.toString());
+        console.log("time" + this.props.time.toString());
+        let offset = this.props.currentTime - this.props.time;
+        return this.secondsTommss(((this.props.duration * 60000) - offset + 1000) / 1000);
     }
 
     secondsTommss(totalSeconds) {
@@ -44,7 +22,8 @@ export default class Timer extends Component {
     }
 
     render() {
-        const time = this.state.countdown || '25:00'
+
+        const time = this.props.time != null && this.props.currentTime != null ? this.calculateCountdown() : `${ this.props.duration }:00`;
 
         return (
             <h1>{time}</h1>

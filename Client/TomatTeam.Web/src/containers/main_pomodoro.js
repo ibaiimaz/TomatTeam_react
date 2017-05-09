@@ -7,7 +7,40 @@ import { bindActionCreators } from 'redux';
 import Timer from '../components/timer';
 import PomodoroStatus from '../components/pomodoro_status';
 
+let interval = null;
+
 class MainPomodoro extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = { currentTime: null }
+    }
+
+    componentDidMount() {
+        this.setCurrentTime();
+    }
+
+    componentDidUpdate(prev_props, prev_state) {
+        this.setCurrentTime();
+    }
+
+    tick() {
+        let offset = new Date() - this.props.currentPomodoro.time;
+        if(offset >= 60000) {
+            this.setState({ currentTime:  null });
+            this.endPomodoro();
+            return;
+        }
+
+        this.setState({ currentTime:  new Date() });
+    }
+
+    setCurrentTime() {
+        if(this.props.currentPomodoro.time != null && interval == null) {
+            interval = setInterval(this.tick.bind(this), 1000)
+        }
+    }
+
     startPomodoro() {
         this.props.currentPomodoro.time = new Date();
         this.props.currentPomodoro.status = 1;
@@ -15,9 +48,36 @@ class MainPomodoro extends Component {
     }
 
     cancelPomodoro() {
+        this.stopInterval();
+
+        this.setState({ currentTime:  null });
+
+        this.props.currentPomodoro.time = null;
+        this.props.currentPomodoro.status = 0;
+        this.props.cancelPomodoro(this.props.currentPomodoro);
+    }
+
+    endPomodoro() {
+        this.stopInterval();
+
         this.props.currentPomodoro.time = null;
         this.props.currentPomodoro.status = 2;
         this.props.cancelPomodoro(this.props.currentPomodoro);
+    }
+
+    startBreak() {
+        this.stopInterval();
+
+        this.props.currentPomodoro.time = new Date();
+        this.props.currentPomodoro.status = 2;
+        this.props.startPomodoro(this.props.currentPomodoro);
+    }
+
+    stopInterval() {
+        if(interval != null) { 
+            clearInterval(interval);
+            interval = null;
+        }
     }
 
     render() {
@@ -28,20 +88,25 @@ class MainPomodoro extends Component {
             // float: 'left'
         };
 
+        const duration = this.props.currentPomodoro.status == 2 ? 5 : 1;
+
         return (
             <div className="col-xs-12 col-sm-6 col-md-5">
                 <h3>USER: { this.props.currentUser.userName }</h3>
                 <div className="panel row">
-                    <div className="col-md-7">
-                        <Timer time={this.props.currentPomodoro.time} />
+                    <div className="col-md-6">
+                        <Timer duration={duration} currentTime={this.state.currentTime} time={this.props.currentPomodoro.time} />
                         <PomodoroStatus status={this.props.currentPomodoro.status} />
                     </div>
-                    <div className="col-md-5">
-                        {this.props.currentPomodoro.status == 0 &&
-                            <button type="button" onClick={() => this.startPomodoro()} >Start</button>
+                    <div className="col-md-6">
+                        {this.props.currentPomodoro.status != 1 &&
+                            <button type="button" onClick={() => this.startPomodoro()} >Start Pomodoro</button>
                         }
-                        {this.props.currentPomodoro.status != 0 &&
-                            <button type="button" onClick={() => this.cancelPomodoro()} >Cancel</button>
+                        {this.props.currentPomodoro.status == 2 && this.props.currentPomodoro.time == null  &&
+                            <button type="button" onClick={() => this.startBreak()} >Start Break</button>
+                        }
+                        {this.props.currentPomodoro.status == 1 &&
+                            <button type="button" onClick={() => this.cancelPomodoro()} >Cancel Pomodoro</button>
                         }
                     </div>
                 </div>
