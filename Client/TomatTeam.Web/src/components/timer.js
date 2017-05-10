@@ -22,8 +22,9 @@ export default class Timer extends Component {
     }
 
     render() {
+        let duration = this.props.duration < 10 ? "0" + this.props.duration : this.props.duration;
 
-        const time = this.props.time != null && this.props.currentTime != null ? this.calculateCountdown() : `${ this.props.duration }:00`;
+        const time = this.props.time != null && this.props.currentTime != null ? this.calculateCountdown() : `${ duration }:00`;
 
         return (
             <h1>{time}</h1>

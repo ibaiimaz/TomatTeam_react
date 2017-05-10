@@ -20,12 +20,14 @@ class PomodoroList extends Component {
     };
 
     return (
-      <div className="col-xs-12 col-sm-6 col-md-7"> 
+      <div className="col-xs-12 col-sm-12 col-md-7 col-lg-6"> 
         <h3>TEAM: { this.props.currentUser.teamName } </h3>
-        <div className="panel">
-        <ul className="list-group">
-          {this.renderList()}
-        </ul>
+        <div className="row panel">
+          <div className="col-xs-12 col-sm-12 col-md-12">
+            <ul className="list-group">
+              {this.renderList()}
+            </ul>
+          </div>
         </div>
       </div>
     );

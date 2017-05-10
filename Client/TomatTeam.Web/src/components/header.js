@@ -8,7 +8,7 @@ class Header extends Component {
         };
 
         return (
-            <div className="header">
+            <div className="header col-xs-12 col-sm-12 col-md-5 col-lg-offset-1 col-lg-4">
                 <h1 >TOMATTEAM</h1>                
             </div>
         );

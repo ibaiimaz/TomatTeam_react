@@ -32,9 +32,22 @@ h3 {
     /*font-size: 1.8rem; */  
     font-weight:600;
     /*border-bottom: 1px solid #ddd;*/
+    margin-top: 1rem;
 }
 
 .panel {
     border: 1px solid #ddd;
     padding: 5px;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.pomodoro-btn-group button {
+    display: block;
+    margin: .2rem 0;
+    max-width: 130px;
+    width: 100%;
 }

@@ -42,6 +42,8 @@ class MainPomodoro extends Component {
     }
 
     startPomodoro() {
+        this.setState({ currentTime:  null });
+
         this.props.currentPomodoro.time = new Date();
         this.props.currentPomodoro.status = 1;
         this.props.startPomodoro(this.props.currentPomodoro);
@@ -60,6 +62,8 @@ class MainPomodoro extends Component {
     endPomodoro() {
         this.stopInterval();
 
+        this.setState({ currentTime:  null });
+
         this.props.currentPomodoro.time = null;
         this.props.currentPomodoro.status = 2;
         this.props.cancelPomodoro(this.props.currentPomodoro);
@@ -67,6 +71,8 @@ class MainPomodoro extends Component {
 
     startBreak() {
         this.stopInterval();
+
+        this.setState({ currentTime:  null });
 
         this.props.currentPomodoro.time = new Date();
         this.props.currentPomodoro.status = 2;
@@ -91,26 +97,28 @@ class MainPomodoro extends Component {
         const duration = this.props.currentPomodoro.status == 2 ? 5 : 1;
 
         return (
-            <div className="col-xs-12 col-sm-6 col-md-5">
+            <div className="col-xs-12 col-sm-12 col-md-5 col-lg-offset-1 col-lg-4">
                 <h3>USER: { this.props.currentUser.userName }</h3>
-                <div className="panel row">
-                    <div className="col-md-6">
-                        <Timer duration={duration} currentTime={this.state.currentTime} time={this.props.currentPomodoro.time} />
-                        <PomodoroStatus status={this.props.currentPomodoro.status} />
-                    </div>
-                    <div className="col-md-6">
-                        {this.props.currentPomodoro.status != 1 &&
-                            <button type="button" onClick={() => this.startPomodoro()} >Start Pomodoro</button>
-                        }
-                        {this.props.currentPomodoro.status == 2 && this.props.currentPomodoro.time == null  &&
-                            <button type="button" onClick={() => this.startBreak()} >Start Break</button>
-                        }
-                        {this.props.currentPomodoro.status == 1 &&
-                            <button type="button" onClick={() => this.cancelPomodoro()} >Cancel Pomodoro</button>
-                        }
+                {/*<div className="panel">*/}
+                    <div className="row panel">
+                        <div className="col-xs-6 col-sm-6 col-md-6">
+                            <Timer duration={duration} currentTime={this.state.currentTime} time={this.props.currentPomodoro.time} />
+                            <PomodoroStatus status={this.props.currentPomodoro.status} />
+                        </div>
+                        <div className="col-xs-6 col-sm-6 col-md-6 pomodoro-btn-group">
+                            {this.props.currentPomodoro.status != 1 &&
+                                <button type="button" onClick={() => this.startPomodoro()} >Start Pomodoro</button>
+                            }
+                            {this.props.currentPomodoro.status == 2 && this.props.currentPomodoro.time == null  &&
+                                <button type="button" onClick={() => this.startBreak()} >Start Break</button>
+                            }
+                            {this.props.currentPomodoro.status == 1 &&
+                                <button type="button" onClick={() => this.cancelPomodoro()} >Cancel Pomodoro</button>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            // </div>
         )
     }
 }
