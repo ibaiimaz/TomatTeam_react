@@ -5,10 +5,8 @@ let offset = null;
 export default class Timer extends Component {
 
     calculateCountdown() {
-        console.log("currentTime" + this.props.currentTime.toString());
-        console.log("time" + this.props.time.toString());
         let offset = this.props.currentTime - this.props.time;
-        return this.secondsTommss(((this.props.duration * 60000) - offset + 1000) / 1000);
+        return this.secondsTommss((this.props.duration - offset + 1000) / 1000);
     }
 
     secondsTommss(totalSeconds) {
@@ -21,10 +19,16 @@ export default class Timer extends Component {
         return result;
     }
 
-    render() {
-        let duration = this.props.duration < 10 ? "0" + this.props.duration : this.props.duration;
+    timeToShow() {
+        if(this.props.time != null && this.props.currentTime != null) {
+            return this.calculateCountdown();
+        } else {
+            return this.secondsTommss(this.props.duration / 1000);
+        }
+    }
 
-        const time = this.props.time != null && this.props.currentTime != null ? this.calculateCountdown() : `${ duration }:00`;
+    render() {        
+        const time = this.timeToShow();
 
         return (
             <h1>{time}</h1>

@@ -8,13 +8,17 @@ import PomodoroList from './pomodoro_list';
 class App extends Component {
   
   render() {
+    const settings = {
+      pomodoroTime: 10 * 1000, //in miliseconds
+      restingTime: 5 * 1000 ////in miliseconds
+    };
     return (
       <div> 
         <div className="row">
           <Header currentUser={this.props.currentUser} />
         </div>
         <div className="row">
-          <MainPomodoro currentUser={this.props.currentUser} />
+          <MainPomodoro settings={settings} currentUser={this.props.currentUser} />
           <PomodoroList currentUser={this.props.currentUser} />
         </div>
       </div>

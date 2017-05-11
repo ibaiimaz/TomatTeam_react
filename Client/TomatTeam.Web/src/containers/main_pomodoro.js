@@ -25,10 +25,22 @@ class MainPomodoro extends Component {
     }
 
     tick() {
-        let offset = new Date() - this.props.currentPomodoro.time;
-        if(offset >= 60000) {
-            this.setState({ currentTime:  null });
-            this.endPomodoro();
+        if(this.props.currentPomodoro.time == null) return;
+
+        const limitTime = this.calculateLimitTime();
+        console.log(limitTime);
+        const offset = new Date() - this.props.currentPomodoro.time;
+        
+        if(offset >= limitTime) {
+
+            switch (this.props.currentPomodoro.status) {
+                case 1:
+                    this.endPomodoro();
+                    break;
+                case 2:
+                    this.endBreak();
+                    break;
+            }
             return;
         }
 
@@ -39,6 +51,10 @@ class MainPomodoro extends Component {
         if(this.props.currentPomodoro.time != null && interval == null) {
             interval = setInterval(this.tick.bind(this), 1000)
         }
+    }
+
+    calculateLimitTime() {
+        return this.props.currentPomodoro.status != 2 ? this.props.settings.pomodoroTime : this.props.settings.restingTime;
     }
 
     startPomodoro() {
@@ -79,6 +95,16 @@ class MainPomodoro extends Component {
         this.props.startPomodoro(this.props.currentPomodoro);
     }
 
+    endBreak() {
+        this.stopInterval();
+
+        this.setState({ currentTime:  null });
+
+        this.props.currentPomodoro.time = null;
+        this.props.currentPomodoro.status = 0;
+        this.props.cancelPomodoro(this.props.currentPomodoro);
+    }
+
     stopInterval() {
         if(interval != null) { 
             clearInterval(interval);
@@ -94,15 +120,13 @@ class MainPomodoro extends Component {
             // float: 'left'
         };
 
-        const duration = this.props.currentPomodoro.status == 2 ? 5 : 1;
-
         return (
             <div className="col-xs-12 col-sm-12 col-md-5 col-lg-offset-1 col-lg-4">
                 <h3>USER: { this.props.currentUser.userName }</h3>
                 {/*<div className="panel">*/}
                     <div className="row panel">
                         <div className="col-xs-6 col-sm-6 col-md-6">
-                            <Timer duration={duration} currentTime={this.state.currentTime} time={this.props.currentPomodoro.time} />
+                            <Timer duration={this.calculateLimitTime()} currentTime={this.state.currentTime} time={this.props.currentPomodoro.time} />
                             <PomodoroStatus status={this.props.currentPomodoro.status} />
                         </div>
                         <div className="col-xs-6 col-sm-6 col-md-6 pomodoro-btn-group">
