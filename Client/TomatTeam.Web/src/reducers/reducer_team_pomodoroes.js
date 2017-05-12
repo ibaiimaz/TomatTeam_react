@@ -1,6 +1,7 @@
 export default function() {
     function getDate() {
-        return new Date('2017-05-01T09:04:00');
+        //return new Date('2017-05-12T20:44:00');
+        return new Date().getTime() - 6*60000;
     }
 
     return [{
