@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PomodoroListItem from '../components/pomodoro_list_item';
 
 class PomodoroList extends Component {
-  
+
   renderList() {
     return this.props.teamPomodoroes.map((pomodoro) => {
       return <PomodoroListItem key={pomodoro.id} pomodoro={pomodoro} />
@@ -20,9 +20,9 @@ class PomodoroList extends Component {
     };
 
     return (
-      <div className="col-xs-12 col-sm-12 col-md-7 col-lg-6"> 
-        <h3>TEAM: { this.props.currentUser.teamName } </h3>
-        <div className="row panel">
+      <div className="col-xs-12 col-sm-12 col-md-7 col-lg-6">
+        <h3>TEAM: {this.props.currentUser.teamName} </h3>
+        <div className="row clear-margin">
           <div className="col-xs-12 col-sm-12 col-md-12">
             <ul className="list-group">
               {this.renderList()}
@@ -36,7 +36,7 @@ class PomodoroList extends Component {
 
 function mapStateToProps(state) {
   return {
-      teamPomodoroes: state.teamPomodoroes
+    teamPomodoroes: state.teamPomodoroes
   };
 }
 

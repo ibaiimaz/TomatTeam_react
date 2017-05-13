@@ -3,29 +3,35 @@ import React from 'react';
 const PomodoroStatus = (props) => {
 
     let statusText = '';
-    let statusColor = '';
+    let textColor = '';
+    let backColor = '';
 
     switch(props.status) {
         case 0: 
             statusText = 'Not started';
-            statusColor = '#000';
+            textColor = '#000';
+            backColor = '#fff';
             break;
         case 1:
             statusText = 'Working ...';
-            statusColor = 'red';
+            textColor = '#fff';
+            backColor = '#ee4848';
             break;
         case 2:
             statusText = 'Resting ...';
-            statusColor = 'green';
+            textColor = '#fff';
+            backColor = '#55aa55';
             break;
     }
     
     const statusStyle = {
-            color: `${ statusColor }`
+            'color': `${ textColor }`,
+            'backgroundColor': `${ backColor }`,
+            'borderRadius': '4px'
         };
 
   return ( 
-    <h5 style={statusStyle}>{statusText}</h5>
+    <div className="status" style={statusStyle}>{statusText}</div>
   );
 };
 

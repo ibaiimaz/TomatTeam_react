@@ -6,7 +6,7 @@ export default class Timer extends Component {
 
     calculateCountdown() {
         let offset = this.props.currentTime - this.props.time;
-        return this.secondsTommss((this.props.duration - offset + 1000) / 1000);
+        return this.secondsTommss((this.props.duration - offset) / 1000);
     }
 
     secondsTommss(totalSeconds) {
@@ -31,7 +31,7 @@ export default class Timer extends Component {
         const time = this.timeToShow();
 
         return (
-            <h1>{time}</h1>
+            <div className="timer">{time}</div>
         );
     }
 }
