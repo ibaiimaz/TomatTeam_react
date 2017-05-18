@@ -13,12 +13,12 @@ const PomodoroStatus = (props) => {
             backColor = '#fff';
             break;
         case 1:
-            statusText = 'Working ...';
+            statusText = 'Working';
             textColor = '#fff';
             backColor = '#ee4848';
             break;
         case 2:
-            statusText = 'Resting ...';
+            statusText = 'Resting';
             textColor = '#fff';
             backColor = '#55aa55';
             break;

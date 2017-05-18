@@ -6,13 +6,15 @@ export default class Timer extends Component {
 
     calculateCountdown() {
         let offset = this.props.currentTime - this.props.time;
+        offset = offset < 0 ? 0 : offset;
+
         return this.secondsTommss((this.props.duration - offset) / 1000);
     }
 
     secondsTommss(totalSeconds) {
-        let minutes = Math.floor(totalSeconds / 60);
-        let seconds = Math.floor(totalSeconds - (minutes * 60));
-
+        totalSeconds = totalSeconds < 0 ? 0 : totalSeconds;
+        let minutes = totalSeconds < 60 ? 0 : Math.ceil(totalSeconds / 60);
+        let seconds = Math.ceil(totalSeconds - (minutes * 60));
         let result = (minutes < 10 ? "0" + minutes : minutes);
         result += ":" + (seconds < 10 ? "0" + seconds : seconds);
 

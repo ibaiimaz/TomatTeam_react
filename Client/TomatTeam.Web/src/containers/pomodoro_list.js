@@ -7,7 +7,7 @@ class PomodoroList extends Component {
 
   renderList() {
     return this.props.teamPomodoroes.map((pomodoro) => {
-      return <PomodoroListItem key={pomodoro.id} pomodoro={pomodoro} />
+      return <PomodoroListItem key={pomodoro.id} pomodoro={pomodoro} currentTime={this.props.currentTime} settings={this.props.settings} />
     });
   }
 

@@ -40,7 +40,7 @@ class App extends Component {
         </div>
         <div className="row clear-margin">
           <MainPomodoro settings={settings} currentUser={this.props.currentUser} currentTime={this.state.currentTime} />
-          <PomodoroList currentUser={this.props.currentUser} />
+          <PomodoroList settings={settings} currentUser={this.props.currentUser} currentTime={this.state.currentTime} />
         </div>
       </div>
     )
