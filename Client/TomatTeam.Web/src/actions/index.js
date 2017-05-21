@@ -1,3 +1,14 @@
+export function clockTick(currentTime, teamPomodoroes) {
+    teamPomodoroes.forEach(function(element) {
+        
+    }, this);
+
+    return {
+        type: 'CLOCK_TICK',
+        payload: { currentTime, teamPomodoroes }
+    };
+}
+
 export function startPomodoro(pomodoro) {
     //console.log(`User ${ pomodoro.userId } started a Pomodoro at ${ pomodoro.time.toString() }`, pomodoro);
     return {

@@ -1,4 +1,11 @@
-export default function () {
+export default function (state = null, action) {
+  switch (action.type) {
+    case 'CLOCK_TICK':
+      
+  }
+
+
+
   function getDate() {
     //return new Date('2017-05-12T20:44:00');
     return new Date();//.getTime() - 6 * 60000;
